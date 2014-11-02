@@ -1,10 +1,11 @@
 /*
   This is a fake candle script running on Arduino Uno or an ATTiny 13 or the like.
-  It just runs against a single LED for now.
+  Two LEDs. One red, one yellow.
 
   Autor: Rene Schwietzke
-  Date: 2014-09-15
+  Date: 2014-11-02
   Version: 0.1
+  License: MIT License
 */
 
 // ***********************************************************************
@@ -45,19 +46,10 @@ unsigned long getRandom(int min, int max)
 
 void loop()
 {
-  unsigned long currentTimeMillis = millis();
+  // unsigned long currentTimeMillis = millis();
 
-  /*if (currentTimeMillis - lastSensorReadTime > 1000) 
-  {
-  }
-    *//*Serial.print(lastSensorReadTime); Serial.print(" ");
-    Serial.print(light); Serial.print(" ");
-    Serial.print(smallestLight); Serial.print(" ");
-    Serial.print(largestLight); Serial.print(" ");
-    Serial.println(mappedLight);*/
-
-  //}
-
+  // make it flicker a little more once in a while, so it is less
+  // nervous, but has its moments
   if (getRandom(0,19) == 1)
   {
     long y = getRandom(100,150);
@@ -67,11 +59,15 @@ void loop()
   }
   else
   {
+    // the normal flicker, less intense and red is not really bright to 
+    // avoid the light being too red
     long y = getRandom(180,210);
 
     analogWrite(YELLOW, y);
     analogWrite(RED, y - 80);
     
   } 
+
+  // just to see the flickering
   delay(getRandom(70, 120));
 }
